@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const logger = require('morgan');
 
 const userRoutes = require('./routes/user');
 const cartRoutes = require('./routes/cart');
@@ -14,6 +15,9 @@ dotenv.config();
 
 const app = express();
 
+app.use(logger('[:date[clf]] Request :method :url', {immediate: true}))
+app.use(logger('[:date[clf]] Response :method :url Status - :status Time - :response-time ms Content length - :res[content-length]'))
+
 // Parse the body text
 app.use(bodyParser.json());
 
@@ -25,7 +29,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
+// Routes '/api/users'
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/carts', cartRoutes);

@@ -9,7 +9,7 @@ import Products from '../components/Products';
 import Newsletter from '../components/Newsletter';
 import Title from '../components/Title';
 
-const ShoppingCategorie = () => {
+const ShoppingCategories = () => {
   const { category } = useParams();
 
   return (
@@ -24,4 +24,4 @@ const ShoppingCategorie = () => {
   );
 };
 
-export default ShoppingCategorie;
+export default ShoppingCategories;

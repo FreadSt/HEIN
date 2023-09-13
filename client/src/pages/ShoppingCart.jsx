@@ -2,22 +2,23 @@ import React, { useState, useEffect } from 'react';
 
 import { useSelector } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
-import { useHistory } from 'react-router-dom';
 
 import { userRequest } from '../request-methods';
-
+import { useNavigate } from "react-router-dom";
 import Navbar from '../layout/Navbar';
 import Announcement from '../layout/Announcement';
 import Footer from '../layout/Footer';
 import CartProduct from '../components/CartProduct';
+import {useNavigation} from "react-router";
 
 const ShoppingCart = () => {
   const [stripeToken, setStripeToken] = useState(null);
-  const history = useHistory();
   const cart = useSelector((store) => store.cart);
 
+  const navigate = useNavigate()
+
   const continueShoppingClickHandler = () => {
-    history.goBack();
+    navigate('/',{replace:true})
   };
 
   const onToken = (token) => {

@@ -45,6 +45,7 @@ const Login = () => {
           ref={passwordRef}
         />
         <button
+            type={'submit'}
           className='mb-4 bg-teal-700 text-white p-2 disabled:bg-teal-500 disabled:cursor-not-allowed'
           disabled={auth.isFetching}
         >

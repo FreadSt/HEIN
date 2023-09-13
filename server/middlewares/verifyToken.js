@@ -2,7 +2,12 @@ const jwt = require('jsonwebtoken');
 
 module.exports.verifyToken = (req, res, next) => {
   const authorization = req.get('Authorization');
-  !authorization && res.status(400).json({ message: 'Not authenticated!' });
+
+  if (!authorization) {
+    res.status(400).json({ message: 'Not authenticated!' })
+    return
+  }
+  //!authorization && res.status(400).json({ message: 'Not authenticated!' });
 
   const token = authorization.split(' ')[1];
 

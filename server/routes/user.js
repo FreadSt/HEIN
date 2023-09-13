@@ -1,9 +1,14 @@
 const express = require('express');
 
 const { updateUser, deleteUser, getUser, getUsers, getUsersStats } = require('../controllers/user');
-const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../middlewares/verifyToken');
+const { verifyTokenAndAuthorization, verifyTokenAndAdmin, verifyToken} = require('../middlewares/verifyToken');
 
 const router = express.Router();
+
+// GET => /api/users/me
+router.get('/me', verifyToken, async (req, res) => {
+    res.status(200).json(req.user)
+})
 
 // PUT => /api/users/:id
 router.patch('/:id', verifyTokenAndAuthorization, updateUser);

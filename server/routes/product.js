@@ -1,22 +1,20 @@
-const express = require('express');
+const express = require("express")
+const {addProduct, deleteProduct, getProduct, getProducts, updateProduct} = require("../controllers/product.js")
+const {verifyTokenAndAdmin} = require("../middlewares/verifyToken.js")
 
-const { addProduct, updateProduct, deleteProduct, getProduct, getProducts } = require('../controllers/product');
-const { verifyTokenAndAdmin } = require('../middlewares/verifyToken');
+console.log("Loading Product routes")
 
-const router = express.Router();
+const router = express.Router()
 
 // POST => /api/products
-router.post('/', verifyTokenAndAdmin, addProduct);
-
+router.post('/', verifyTokenAndAdmin, addProduct)
 // PATCH => /api/products/:id
-router.patch('/:id', verifyTokenAndAdmin, updateProduct);
-
+router.patch('/:id', verifyTokenAndAdmin, updateProduct)
 // DELETE => /api/products/:id
-router.delete('/:id', verifyTokenAndAdmin, deleteProduct);
-
+router.delete('/:id', verifyTokenAndAdmin, deleteProduct)
 // GET => /api/products/:id
-router.get('/:id', getProduct);
-
+router.get('/:id', getProduct)
 // GET => /api/products
-router.get('/', getProducts);
-module.exports = router;
+router.get('/', getProducts)
+
+module.exports = router

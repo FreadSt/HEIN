@@ -1,8 +1,8 @@
-const fs = require('fs');
-var randomHex = require('random-hex');
+const fs = require('fs')
+var randomHex = require('random-hex')
 
 fs.readFile('fake-api-products.json', 'utf-8', (err, products) => {
-  products = JSON.parse(products);
+  products = JSON.parse(products)
   products = products.map(product => {
     return {
       title: product.title,
@@ -13,9 +13,9 @@ fs.readFile('fake-api-products.json', 'utf-8', (err, products) => {
       color: ['red', 'green', 'yellow', 'orange'],
       price: product.price,
       inStock: true
-    };
-  });
-  products = JSON.stringify(products);
-  fs.writeFileSync('products.json', products);
-});
+    }
+  })
+  products = JSON.stringify(products)
+  fs.writeFileSync('products.json', products)
+})
 

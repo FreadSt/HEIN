@@ -1,0 +1,38 @@
+{
+  "estebanf": {
+    "username": "estebanf",
+    "email": "bernard_laurencen2@himself.xr",
+    "password": "YyqPeKF3oZZRUkEvFIPZ",
+    "isAdmin": false
+  },
+  "juditr": {
+    "username": "juditr",
+    "email": "soyla_classenkdj@inventory.pjx",
+    "password": "rI4DHZ45P26",
+    "isAdmin": false
+  },
+  "olanrewajusye": {
+    "username": "olanrewajusye",
+    "email": "natina_peelqh@incorrect.qa",
+    "password": "ZYyKrMewkSmYaP6TB",
+    "isAdmin": false
+  },
+  "danyalxq": {
+    "username": "danyalxq",
+    "email": "lakesha_blissy@commissioners.vmf",
+    "password": "GvBi60Gk1ozygIC8VMwblD",
+    "isAdmin": false
+  },
+  "harlonya": {
+    "username": "harlonya",
+    "email": "toddrick_burkeylfht@provinces.nv",
+    "password": "5p47Ke7h7qvIONG136UKT2o",
+    "isAdmin": false
+  },
+  "admin": {
+    "username": "admin",
+    "email": "admin@domain.com",
+    "password": "1234",
+    "isAdmin": true
+  }
+}

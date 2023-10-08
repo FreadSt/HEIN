@@ -1,23 +1,24 @@
-const express = require('express');
+const express = require("express")
+const {createCart, deleteCart, getCarts, getUserCart, updateCart} = require("../controllers/cart.js")
+const {verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization} = require("../middlewares/verifyToken.js")
 
-const { createCart, updateCart, deleteCart, getUserCart, getCarts } = require('../controllers/cart');
-const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../middlewares/verifyToken');
+console.log("Loading Cart routes")
 
-const router = express.Router();
+const router = express.Router()
 
-// POST => /api/carts 
-router.post('/', verifyToken, createCart);
+// POST => /api/carts
+router.post('/', verifyToken, createCart)
 
 // PATCH => /api/carts/:id
-router.patch('/:id', verifyTokenAndAuthorization, updateCart);
+router.patch('/:id', verifyTokenAndAuthorization, updateCart)
 
 // DELETE => /api/carts/:id
-router.delete('/:id', verifyTokenAndAuthorization, deleteCart);
+router.delete('/:id', verifyTokenAndAuthorization, deleteCart)
 
 // GET => /api/carts/:userId
-router.get('/:userId', getUserCart);
+router.get('/:userId', getUserCart)
 
 // GET => /api/carts
-router.get('/', verifyTokenAndAdmin, getCarts);
+router.get('/', verifyTokenAndAdmin, getCarts)
 
-module.exports = router;
+module.exports = router

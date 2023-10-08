@@ -1,0 +1,17 @@
+{
+  "red": {
+    "internalName": "red",
+    "displayName": "Ultra Red",
+    "code": "FF0000"
+  },
+  "green": {
+    "internalName": "green",
+    "displayName": "Ultra Green",
+    "code": "00FF00"
+  },
+  "blue": {
+    "internalName": "blue",
+    "displayName": "Ultra Blue",
+    "code": "0000FF"
+  }
+}

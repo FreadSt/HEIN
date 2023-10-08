@@ -1,9 +1,10 @@
-const express = require('express');
+const express = require('express')
+const { updateUser, deleteUser, getUser, getUsers, getUsersStats } = require('../controllers/user')
+const { verifyTokenAndAuthorization, verifyTokenAndAdmin, verifyToken} = require('../middlewares/verifyToken')
 
-const { updateUser, deleteUser, getUser, getUsers, getUsersStats } = require('../controllers/user');
-const { verifyTokenAndAuthorization, verifyTokenAndAdmin, verifyToken} = require('../middlewares/verifyToken');
+console.log("Loading User routes")
 
-const router = express.Router();
+const router = express.Router()
 
 // GET => /api/users/me
 router.get('/me', verifyToken, async (req, res) => {
@@ -11,18 +12,14 @@ router.get('/me', verifyToken, async (req, res) => {
 })
 
 // PUT => /api/users/:id
-router.patch('/:id', verifyTokenAndAuthorization, updateUser);
-
+router.patch('/:id', verifyTokenAndAuthorization, updateUser)
 // DELETE => /api/users/:id
-router.delete('/:id', verifyTokenAndAuthorization, deleteUser);
-
+router.delete('/:id', verifyTokenAndAuthorization, deleteUser)
 // GET => /api/users/stats
-router.get('/stats', verifyTokenAndAdmin, getUsersStats);   // must be here
-
+router.get('/stats', verifyTokenAndAdmin, getUsersStats)
 // GET => /api/users/:id
-router.get('/:id', verifyTokenAndAdmin, getUser);           // must be here
-
+router.get('/:id', verifyTokenAndAdmin, getUser)
 // GET => /api/users
-router.get('/', verifyTokenAndAdmin, getUsers);
+router.get('/', verifyTokenAndAdmin, getUsers)
 
 module.exports = router;

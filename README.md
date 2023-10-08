@@ -47,10 +47,10 @@ $ npm run build
 
 ### 💻 Server
 
-1. **_Navigate to the server directory_**
+1. **_Navigate to the main directory_**
 
 ```sh
-$ cd server
+$ cd main
 ```
 
 2. **_Install dependencies_**
@@ -125,10 +125,10 @@ $ npm run build
 |   |       |-- auth-actions.js
 |   |       |-- auth-slice.js
 |   |       |-- cart-slice.js
-|   |       `-- index.js
+|   |       `-- main.js
 |   |-- tailwind.config.cjs
 |   `-- vite.config.js
-`-- server
+`-- main
     |-- controllers
     |   |-- auth.js
     |   |-- cart.js
@@ -139,13 +139,13 @@ $ npm run build
     |   |-- cleanup-script.js
     |   |-- fake-api-products.json
     |   `-- products.json
-    |-- index.js
+    |-- main.js
     |-- middlewares
     |   `-- verifyToken.js
     |-- models
-    |   |-- Cart.js
-    |   |-- Order.js
-    |   |-- Product.js
+    |   |-- CartModel.js
+    |   |-- OrderModel.js
+    |   |-- ProductModel.js
     |   `-- User.js
     |-- package-lock.json
     |-- package.json

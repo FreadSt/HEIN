@@ -1,42 +1,34 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { validationResult } = require('express-validator');
+const {validationResult} = require('express-validator');
 
 const User = require('../models/User');
 
-module.exports.register = (req, res, next) => {
-  // const errors = validationResult(req);
-  // !errors.isEmpty() && res.status(400).json({ errors: errors.array() });
-  const username = req.body.username;
-  const email = req.body.email;
-  const password = req.body.password;
-  const isAdmin = req.body.isAdmin || false;
-  bcrypt.hash(password, 12)
-    .then(hashedPassword => {
-      const user = new User({
-        username,
-        email,
-        password: hashedPassword,
-        isAdmin
-      });
-      return user.save();
-    })
-    .then(user => {
-      res.status(201).json({
-        message: 'User is registered successfully.',
-        user
-      });
-    })
-    .catch(error => {
-      res.status(500).json(error);
+module.exports.register = async (req, res, next) => {
+  try {
+    const password = req.body.password;
+    const hash = await bcrypt.hash(password, 12);
+    const user = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: hash,
+      isAdmin: req.body.isAdmin || false
     });
+    user.save();
+    res.status(201).json({
+      message: 'User is registered successfully.',
+      user
+    });
+  } catch (e) {
+    res.status(500).json(e);
+  }
 };
 
 module.exports.login = (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   let user;
-  User.findOne({ username })
+  User.findOne({username})
     .then(foundUser => {
       !foundUser && res.status(400).json({
         message: 'Username is not valid!'

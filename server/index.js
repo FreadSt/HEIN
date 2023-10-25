@@ -42,7 +42,7 @@ app.use('/api/checkout', stripeRoutes);
 // Error
 app.use((req, res) => {
     res.status(404).json({
-        message: 'Error serving the request !'
+        message: 'No endpoint defined'
     });
 });
 

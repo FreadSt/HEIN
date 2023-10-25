@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const {validationResult} = require('express-validator');
 
 const User = require('../models/User');
 
@@ -14,10 +13,15 @@ module.exports.register = async (req, res, next) => {
       password: hash,
       isAdmin: req.body.isAdmin || false
     });
-    user.save();
+    await user.save();
+    const token = jwt.sign({
+      id: user._id.toString(),
+      isAdmin: user.isAdmin
+    }, process.env.JWT_SECRET_KEY, {expiresIn: '1d'});
     res.status(201).json({
-      message: 'User is registered successfully.',
-      user
+      userId: user._id.toString(),
+      token,
+      username: user.username
     });
   } catch (e) {
     res.status(500).json(e);
@@ -55,6 +59,7 @@ module.exports.login = (req, res, next) => {
         message: 'User is logined successfully.',
         token,
         userId: user._id.toString(),
+        username: user.username,
         isAdmin: user.isAdmin
       });
     })

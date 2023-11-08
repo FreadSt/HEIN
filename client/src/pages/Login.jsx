@@ -8,6 +8,7 @@ import { login } from '../store/auth-actions';
 const Login = () => {
   const dispatch = useDispatch();
   const auth = useSelector((store) => store.auth);
+  console.log(auth, "auth 1")
   const usernameRef = useRef();
   const passwordRef = useRef();
   const formSubmitHandler = (e) => {
@@ -15,14 +16,14 @@ const Login = () => {
     const username = usernameRef.current.value;
     const password = passwordRef.current.value;
     if (!password.trim() || !username.trim()) return;
-    dispatch(
-      login({
-        username,
-        password,
-      })
-    );
-    usernameRef.current.value = '';
-    passwordRef.current.value = '';
+      dispatch(
+        login({
+          username,
+          password,
+        })
+      );
+    // usernameRef.current.value = '';
+    // passwordRef.current.value = '';
   };
   return (
     <div className='px-4 w-full h-screen flex justify-center items-center bg-login bg-no-repeat bg-cover'>

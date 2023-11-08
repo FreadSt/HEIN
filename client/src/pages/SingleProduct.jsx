@@ -13,15 +13,17 @@ import Footer from '../layout/Footer';
 import Newsletter from '../components/Newsletter';
 
 const SingleProduct = () => {
-  const { id } = useParams();
+  const {id} = useParams();
   const dispatch = useDispatch();
   const [product, setProduct] = useState({});
   let [quantity, setQuantity] = useState(1);
   let [size, setSize] = useState('S');
+  const username = useSelector((store) => store.auth.currentUser.username);
   const getProduct = async () => {
     try {
       const url = `/products/${id}`;
       const response = await publicRequest.get(url);
+      console.log(response.data, "get product")
       setProduct(response.data);
     } catch (error) {
       console.log(error);
@@ -33,13 +35,15 @@ const SingleProduct = () => {
   const addToCartHandler = () => {
     dispatch(addProduct({ product, size, quantity, username }));
   };
+
   useEffect(() => {
     getProduct();
   }, []);
+
   return (
     <>
-      <Announcement />
-      <Navbar />
+      <Announcement/>
+      <Navbar/>
       <section className='p-8 grid md:grid-cols-2 gap-8'>
         <div className='grow'>
           <img

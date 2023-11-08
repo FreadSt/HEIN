@@ -24,9 +24,9 @@ const Signup = () => {
         } catch (error) {
             console.log(error, "Error")
         }
-        usernameRef.current.value = '';
+        // usernameRef.current.value = '';
         passwordRef.current.value = '';
-        emailRef.current.value = '';
+        // emailRef.current.value = '';
     }
     return (
         <div className='px-4 w-full h-screen flex justify-center items-center bg-login bg-no-repeat bg-cover'>

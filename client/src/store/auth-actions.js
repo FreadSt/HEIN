@@ -6,7 +6,9 @@ export const login = (user) => {
     dispatch(loginStart());
     try {
       const response = await publicRequest.post('/auth/login', user);
+      console.log(user, "user")
       dispatch(loginSuccess(response.data));
+      window.location.href = '/'
     } catch (err) {
       dispatch(loginFailure());
     }

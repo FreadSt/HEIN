@@ -4,24 +4,41 @@ import { Badge } from '@mui/material';
 import { Search, ShoppingCart } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
-  const totalQantity = useSelector((store) => store.cart.totalQantity);
+  const [user, setUser] = useState(useSelector((store) => store.auth.currentUser));
+  const totalQuantity = useSelector((store) => store.cart[user.username].totalQuantity);
+
+  // useEffect(() => {
+  //   setUser(undefined)
+  // },[])
+
   return (
     <nav className='grid grid-cols-2 p-4 border-b font-semibold h-18'>
       <h1 className='font-bold text-3xl uppercase flex items-center justify-start px-4 tracking-wider'>
-        <a href=''>Hein.</a>
+        <a href='/'>Hein.</a>
       </h1>
       <div className='flex justify-end items-center px-4 text-md md:text-lg'>
-        <Link to='/signup' className='uppercase px-4 py-2'>
-          Register
-        </Link>
-        <Link to='/login' className='uppercase px-4 py-2'>
-          Sign in
-        </Link>
+        {
+          user ?
+              <>
+                <Link className='px-4 py-2'>{user.username}</Link>
+                <button className='px-4 py-2' onClick={() => {setUser(undefined)}}>Sign Out</button>
+              </>
+              :
+              <>
+                <Link to='/signup' className='uppercase px-4 py-2'>
+                  Register
+                </Link>
+                <Link to='/login' className='uppercase px-4 py-2'>
+                  Sign in
+                </Link>
+              </>
+        }
         <Link to='/cart'>
           <Badge
-            badgeContent={totalQantity}
+            badgeContent={totalQuantity}
             color='primary'
             className='cursor-pointer'
           >

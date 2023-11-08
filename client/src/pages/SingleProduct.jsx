@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 
-import { Add, Remove } from '@mui/icons-material';
-import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import {Add, Remove} from '@mui/icons-material';
+import {useParams} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 
-import { publicRequest } from '../request-methods';
-import { addProduct } from '../store/cart-slice';
+import {publicRequest} from '../request-methods';
+import {addProduct} from '../store/cart-slice';
 
 import Navbar from '../layout/Navbar';
 import Announcement from '../layout/Announcement';
@@ -78,9 +78,10 @@ const SingleProduct = () => {
                   quantity > 1 && setQuantity(quantity--);
                 }}
               >
-                <Remove />
+                <Remove/>
               </span>
-              <span className='mx-2 text-xl h-10 w-10 rounded-2xl border flex justify-center items-center'>
+              <span
+                className='mx-2 text-xl h-10 w-10 rounded-2xl border flex justify-center items-center'>
                 {quantity}
               </span>
               <span
@@ -89,7 +90,7 @@ const SingleProduct = () => {
                   setQuantity(quantity++);
                 }}
               >
-                <Add />
+                <Add/>
               </span>
             </div>
             <div>
@@ -103,8 +104,8 @@ const SingleProduct = () => {
           </div>
         </div>
       </section>
-      <Newsletter />
-      <Footer />
+      <Newsletter/>
+      <Footer/>
     </>
   );
 };

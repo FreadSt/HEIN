@@ -1,18 +1,20 @@
 import React from 'react';
 
-import { Badge } from '@mui/material';
-import { Search, ShoppingCart } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import {Badge} from '@mui/material';
+import {Search, ShoppingCart} from '@mui/icons-material';
+import {useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {useState, useEffect} from "react";
 
 const Navbar = () => {
   const [user, setUser] = useState(useSelector((store) => store.auth.currentUser));
-  const totalQuantity = useSelector((store) => store.cart[user.username].totalQuantity);
-
-  // useEffect(() => {
-  //   setUser(undefined)
-  // },[])
+  let totalQuantity = 0
+  if (user?.username) {
+    const cartStore = useSelector((store) => store.cart)
+    if (cartStore[user.username]) {
+      totalQuantity = cartStore[user.username].totalQuantity
+    }
+  }
 
   return (
     <nav className='grid grid-cols-2 p-4 border-b font-semibold h-18'>
@@ -22,19 +24,22 @@ const Navbar = () => {
       <div className='flex justify-end items-center px-4 text-md md:text-lg'>
         {
           user ?
-              <>
-                <Link className='px-4 py-2'>{user.username}</Link>
-                <button className='px-4 py-2' onClick={() => {setUser(undefined)}}>Sign Out</button>
-              </>
-              :
-              <>
-                <Link to='/signup' className='uppercase px-4 py-2'>
-                  Register
-                </Link>
-                <Link to='/login' className='uppercase px-4 py-2'>
-                  Sign in
-                </Link>
-              </>
+            <>
+              <Link className='px-4 py-2'>{user.username}</Link>
+              <button className='px-4 py-2' onClick={() => {
+                setUser(undefined)
+              }}>Sign Out
+              </button>
+            </>
+            :
+            <>
+              <Link to='/signup' className='uppercase px-4 py-2'>
+                Register
+              </Link>
+              <Link to='/login' className='uppercase px-4 py-2'>
+                Sign in
+              </Link>
+            </>
         }
         <Link to='/cart'>
           <Badge
@@ -42,7 +47,7 @@ const Navbar = () => {
             color='primary'
             className='cursor-pointer'
           >
-            <ShoppingCart />
+            <ShoppingCart/>
           </Badge>
         </Link>
       </div>

@@ -14,7 +14,7 @@ import {useNavigation} from "react-router";
 const ShoppingCart = () => {
   const [stripeToken, setStripeToken] = useState(null);
   const username = useSelector((store) => store.auth.currentUser?.username ?? null);
-  const cart = useSelector((store) => store.cart[username]);
+  const cart = useSelector((store) => store.cart[username]) ?? { products: [], totalQuantity: 0, totalPrice: 0 };
 
   const navigate = useNavigate()
 
@@ -58,7 +58,7 @@ const ShoppingCart = () => {
           </div>
           <div className='flex'>
             <p className='mr-4 cursor-pointer'>
-              Shopping Bag ({cart.totalQantity})
+              Shopping Bag ({cart.totalQuantity})
             </p>
             {/* <a className='underline cursor-pointer'>Your Wishlist (0)</a> */}
           </div>

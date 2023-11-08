@@ -19,11 +19,12 @@ const cartSlice = createSlice({
        * @property {string} size
        * **/
       const product = {...action.payload.product, quantity: action.payload.quantity, size: action.payload.size}
+      const username = action.payload.username ?? null
 
-      const userState = state[action.payload.username]
+      const userState = state[username]
 
       if (!userState) {
-        state[action.payload.username] = {
+        state[username] = {
           products: [product],
           totalQuantity: product.quantity,
           totalPrice: product.price * product.quantity

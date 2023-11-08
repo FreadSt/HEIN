@@ -13,7 +13,7 @@ import {useNavigation} from "react-router";
 
 const ShoppingCart = () => {
   const [stripeToken, setStripeToken] = useState(null);
-  const username = useSelector((store) => store.auth.currentUser?.username);
+  const username = useSelector((store) => store.auth.currentUser?.username ?? null);
   const cart = useSelector((store) => store.cart[username]);
 
   const navigate = useNavigate()

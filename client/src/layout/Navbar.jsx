@@ -8,13 +8,8 @@ import {useState, useEffect} from "react";
 
 const Navbar = () => {
   const [user, setUser] = useState(useSelector((store) => store.auth.currentUser));
-  let totalQuantity = 0
-  if (user?.username) {
-    const cartStore = useSelector((store) => store.cart)
-    if (cartStore[user.username]) {
-      totalQuantity = cartStore[user.username].totalQuantity
-    }
-  }
+  const cartStore = useSelector((store) => store.cart)
+  const totalQuantity = cartStore[user?.username ?? null]?.totalQuantity ?? 0
 
   return (
     <nav className='grid grid-cols-2 p-4 border-b font-semibold h-18'>

@@ -5,6 +5,7 @@ import {Search, ShoppingCart} from '@mui/icons-material';
 import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {useState, useEffect} from "react";
+import {logout} from "../store/auth-slice.js";
 
 const Navbar = () => {
   const [user, setUser] = useState(useSelector((store) => store.auth.currentUser));
@@ -22,7 +23,7 @@ const Navbar = () => {
             <>
               <Link className='px-4 py-2'>{user.username}</Link>
               <button className='px-4 py-2' onClick={() => {
-                setUser(undefined)
+                dispatch(logout())
               }}>Sign Out
               </button>
             </>

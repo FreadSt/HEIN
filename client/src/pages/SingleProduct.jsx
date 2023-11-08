@@ -31,7 +31,7 @@ const SingleProduct = () => {
     setSize(e.target.value);
   };
   const addToCartHandler = () => {
-    dispatch(addProduct({ product, size, quantity }));
+    dispatch(addProduct({ product, size, quantity, username }));
   };
   useEffect(() => {
     getProduct();

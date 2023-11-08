@@ -1,47 +1,63 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
-const initialState = {
-  products: [],
-  totalQantity: 0,
-  totalPrice: 0
-};
 const cartSlice = createSlice({
   name: 'cart',
-  initialState,
+  initialState: {}, // key = username, value = { products: [], quantity: number, price: number }
   reducers: {
+    // action.payload = { product, size, quantity, username }
     addProduct(state, action) {
-      const newProduct = {
-        _id: action.payload.product._id,
-        title: action.payload.product.title,
-        description: action.payload.product.description,
-        image: action.payload.product.image,
-        price: action.payload.product.price,
-        quantity: action.payload.quantity,
-        size: action.payload.size
-      };
-      let added = false;
+      /** @typedef {object} json
+       * @property {string} _id
+       * @property {string} title
+       * @property {string} description
+       * @property {string} image
+       * @property {string} category
+       * @property {string[]} color
+       * @property {number} price
+       * @property {boolean} inStock
+       * @property {number} quantity
+       * @property {string} size
+       * **/
+      const product = {...action.payload.product, quantity: action.payload.quantity, size: action.payload.size}
 
-      for (let oldProduct of state.products) {
-        // Check if the product already added before
-        if (oldProduct._id === newProduct._id) {
-          // If added before check if the same size 
-          if (oldProduct.size === newProduct.size) {
-            // If the same size increase the quantity
-            oldProduct.quantity += newProduct.quantity;
-            added = true;
-            break;
+      const userState = state[action.payload.username]
+
+      if (!userState) {
+        state[action.payload.username] = {
+          products: [product],
+          totalQuantity: product.quantity,
+          totalPrice: product.price * product.quantity
+        }
+        return
+      }
+
+      const storedProducts = userState.products
+
+      try {
+        for (const storedProduct of storedProducts) {
+          if (storedProduct._id === product._id && storedProduct.size === product.size) {
+            storedProduct.quantity += product.quantity
+            return
           }
         }
+
+        storedProducts.push(product);
+
+      } finally {
+        let totalQuantity = 0
+        let totalPrice = 0
+
+        storedProducts.forEach(product => {
+          totalQuantity += product.quantity
+          totalPrice += product.quantity * product.price
+        })
+
+        userState.totalQuantity = totalQuantity
+        userState.totalPrice = totalPrice
       }
-      // If not added before or not the same size push it as a new product 
-      if (!added) {
-        state.products.push(newProduct);
-      }
-      state.totalQantity += newProduct.quantity;
-      state.totalPrice += newProduct.price * newProduct.quantity;
     },
   }
 });
 
-export const { addProduct } = cartSlice.actions;
+export const {addProduct} = cartSlice.actions;
 export default cartSlice;

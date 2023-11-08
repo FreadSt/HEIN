@@ -75,7 +75,7 @@ const SingleProduct = () => {
               <span
                 className='cursor-pointer'
                 onClick={() => {
-                  quantity > 1 && setQuantity(quantity--);
+                  if (quantity > 1) { setQuantity(quantity--) }
                 }}
               >
                 <Remove/>

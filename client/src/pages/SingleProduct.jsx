@@ -18,7 +18,7 @@ const SingleProduct = () => {
   const [product, setProduct] = useState({});
   let [quantity, setQuantity] = useState(1);
   let [size, setSize] = useState('S');
-  const username = useSelector((store) => store.auth.currentUser.username);
+  const username = useSelector((store) => store.auth.currentUser?.username);
   const getProduct = async () => {
     try {
       const url = `/products/${id}`;

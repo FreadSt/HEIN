@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Badge} from '@mui/material';
 import {Search, ShoppingCart} from '@mui/icons-material';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {useState, useEffect} from "react";
 import {logout} from "../store/auth-slice.js";
@@ -11,6 +11,7 @@ const Navbar = () => {
   const [user, setUser] = useState(useSelector((store) => store.auth.currentUser));
   const cartStore = useSelector((store) => store.cart)
   const totalQuantity = cartStore[user?.username ?? null]?.totalQuantity ?? 0
+  const dispatch = useDispatch()
 
   return (
     <nav className='grid grid-cols-2 p-4 border-b font-semibold h-18'>
@@ -24,6 +25,8 @@ const Navbar = () => {
               <Link className='px-4 py-2'>{user.username}</Link>
               <button className='px-4 py-2' onClick={() => {
                 dispatch(logout())
+                setUser(undefined)
+                window.location.href = "/"
               }}>Sign Out
               </button>
             </>

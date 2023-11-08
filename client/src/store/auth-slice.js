@@ -21,7 +21,9 @@ const authSlice = createSlice({
       state.error = true;
     },
     logout(state) {
-      state = initialState
+      state.currentUser = null
+      state.isFetching = false
+      state.error = false
     }
   }
 });
